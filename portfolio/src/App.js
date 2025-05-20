@@ -1,81 +1,202 @@
 import React, { useState } from 'react';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  Container,
+  Box,
+  Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  TextField,
+  CssBaseline,
+  Paper,
+  Fade,
+  Grow,
+  createTheme,
+  ThemeProvider,
+} from '@mui/material';
+import { Brightness4, Brightness7 } from '@mui/icons-material';
 import './App.css';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const theme = createTheme({
+    palette: {
+      mode: darkMode ? 'dark' : 'light',
+      primary: { main: '#1976d2' },
+      secondary: { main: '#00bcd4' },
+    },
+    shape: { borderRadius: 12 },
+    typography: {
+      fontFamily: 'Inter, Roboto, Arial, sans-serif',
+      h1: { fontWeight: 700 },
+      h2: { fontWeight: 600 },
+    },
+  });
+
   const toggleDarkMode = () => setDarkMode(!darkMode);
 
   return (
-    <div className={darkMode ? 'app dark' : 'app'}>
-      <nav className="navbar">
-        <h1>Sai Mani Ritish</h1>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <button onClick={toggleDarkMode} className="toggle-mode">
-          {darkMode ? 'Light Mode' : 'Dark Mode'}
-        </button>
-      </nav>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppBar position="sticky" color="default" elevation={2}>
+        <Toolbar>
+          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700 }}>
+            Sai Mani Ritish
+          </Typography>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 2 }}>
+            <Button color="inherit" href="#home">Home</Button>
+            <Button color="inherit" href="#about">About</Button>
+            <Button color="inherit" href="#skills">Skills</Button>
+            <Button color="inherit" href="#projects">Projects</Button>
+            <Button color="inherit" href="#contact">Contact</Button>
+          </Box>
+          <IconButton onClick={toggleDarkMode} color="inherit" sx={{ ml: 2 }}>
+            {darkMode ? <Brightness7 /> : <Brightness4 />}
+          </IconButton>
+        </Toolbar>
+      </AppBar>
 
-      <section id="home" className="section fade-in">
-        <h2>Welcome</h2>
-        <p>I am a Full-Stack Developer with a focus on AI/ML and Cloud technologies.</p>
-      </section>
+      <Container maxWidth="md" sx={{ mt: 6, mb: 6 }}>
+        <Fade in timeout={800}>
+          <Paper id="home" elevation={3} sx={{ p: 5, mb: 6, borderRadius: 4, textAlign: 'center' }}>
+            <Typography variant="h2" gutterBottom>Welcome</Typography>
+            <Typography variant="h5" color="text.secondary">
+              I am a Full-Stack Developer with a focus on AI/ML and Cloud technologies.
+            </Typography>
+          </Paper>
+        </Fade>
 
-      <section id="about" className="section fade-in">
-        <h2>About Me</h2>
-        <p>I'm currently pursuing an M.S. in Computer Science with strong interests in building intelligent, scalable applications.</p>
-      </section>
+        <Fade in timeout={1000}>
+          <Paper id="about" elevation={3} sx={{ p: 5, mb: 6, borderRadius: 4 }}>
+            <Typography variant="h3" gutterBottom>About Me</Typography>
+            <Typography variant="body1" color="text.secondary">
+              I'm currently pursuing an M.S. in Computer Science with strong interests in building intelligent, scalable applications.
+            </Typography>
+          </Paper>
+        </Fade>
 
-      <section id="skills" className="section fade-in">
-        <h2>Skills</h2>
-        <ul>
-          <li>Languages: Python, C++, SQL, JavaScript</li>
-          <li>Frameworks: React, Node.js, Express</li>
-          <li>Tools: Docker, AWS, Git</li>
-        </ul>
-      </section>
+        <Fade in timeout={1200}>
+          <Paper id="skills" elevation={3} sx={{ p: 5, mb: 6, borderRadius: 4 }}>
+            <Typography variant="h3" gutterBottom>Skills</Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={4}>
+                <Typography variant="subtitle1" fontWeight={600}>Languages</Typography>
+                <Typography variant="body2">Python, C++, SQL, JavaScript</Typography>
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <Typography variant="subtitle1" fontWeight={600}>Frameworks</Typography>
+                <Typography variant="body2">React, Node.js, Express</Typography>
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <Typography variant="subtitle1" fontWeight={600}>Tools</Typography>
+                <Typography variant="body2">Docker, AWS, Git</Typography>
+              </Grid>
+            </Grid>
+          </Paper>
+        </Fade>
 
-      <section id="projects" className="section fade-in">
-        <h2>Projects</h2>
-        <div className="project-grid">
-          <div className="card">
-            <img src="/images/schedulearn.png" alt="ScheduLearn" />
-            <h3>ScheduLearn</h3>
-            <p>AI-powered scheduling assistant.</p>
-            <a href="#">View Project</a>
-          </div>
-          <div className="card">
-            <img src="/images/finance.png" alt="Finance App" />
-            <h3>Personal Finance App</h3>
-            <p>MERN stack with AI financial insights.</p>
-            <a href="#">View Project</a>
-          </div>
-          <div className="card">
-            <img src="/images/bloodbank.png" alt="Blood Bank" />
-            <h3>Online Blood Bank System</h3>
-            <p>AWS-based scalable system.</p>
-            <a href="#">View Project</a>
-          </div>
-        </div>
-      </section>
+        <Fade in timeout={1400}>
+          <Box id="projects" sx={{ mb: 6 }}>
+            <Typography variant="h3" gutterBottom>Projects</Typography>
+            <Grid container spacing={4}>
+              <Grow in timeout={1600}>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Card elevation={4} sx={{ borderRadius: 3, height: '100%', display: 'flex', flexDirection: 'column' }}>
+                    <CardMedia
+                      component="img"
+                      height="160"
+                      image="/images/schedulearn.png"
+                      alt="ScheduLearn"
+                    />
+                    <CardContent>
+                      <Typography variant="h5" gutterBottom>ScheduLearn</Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        AI-powered scheduling assistant.
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button size="small" href="#" variant="outlined">View Project</Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              </Grow>
+              <Grow in timeout={1800}>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Card elevation={4} sx={{ borderRadius: 3, height: '100%', display: 'flex', flexDirection: 'column' }}>
+                    <CardMedia
+                      component="img"
+                      height="160"
+                      image="/images/finance.png"
+                      alt="Finance App"
+                    />
+                    <CardContent>
+                      <Typography variant="h5" gutterBottom>Personal Finance App</Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        MERN stack with AI financial insights.
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button size="small" href="#" variant="outlined">View Project</Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              </Grow>
+              <Grow in timeout={2000}>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Card elevation={4} sx={{ borderRadius: 3, height: '100%', display: 'flex', flexDirection: 'column' }}>
+                    <CardMedia
+                      component="img"
+                      height="160"
+                      image="/images/bloodbank.png"
+                      alt="Blood Bank"
+                    />
+                    <CardContent>
+                      <Typography variant="h5" gutterBottom>Online Blood Bank System</Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        AWS-based scalable system.
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button size="small" href="#" variant="outlined">View Project</Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              </Grow>
+            </Grid>
+          </Box>
+        </Fade>
 
-      <section id="contact" className="section fade-in">
-        <h2>Contact</h2>
-        <form className="contact-form">
-          <input type="text" placeholder="Your Name" required />
-          <input type="email" placeholder="Your Email" required />
-          <textarea placeholder="Your Message" required></textarea>
-          <button type="submit">Send Message</button>
-        </form>
-      </section>
+        <Fade in timeout={2200}>
+          <Paper id="contact" elevation={3} sx={{ p: 5, mb: 6, borderRadius: 4 }}>
+            <Typography variant="h3" gutterBottom>Contact</Typography>
+            <Box
+              component="form"
+              className="contact-form"
+              sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: 400, mx: 'auto' }}
+            >
+              <TextField label="Your Name" variant="outlined" required />
+              <TextField label="Your Email" type="email" variant="outlined" required />
+              <TextField label="Your Message" multiline rows={4} variant="outlined" required />
+              <Button type="submit" variant="contained" color="primary" size="large">
+                Send Message
+              </Button>
+            </Box>
+          </Paper>
+        </Fade>
+      </Container>
 
-      <footer className="footer">© 2025 Sai Mani Ritish. All rights reserved.</footer>
-    </div>
+      <Box component="footer" sx={{ py: 3, textAlign: 'center', bgcolor: 'background.paper', borderTop: 1, borderColor: 'divider' }}>
+        <Typography variant="body2" color="text.secondary">
+          © 2025 Sai Mani Ritish. All rights reserved.
+        </Typography>
+      </Box>
+    </ThemeProvider>
   );
 }
 
